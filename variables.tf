@@ -1,5 +1,5 @@
 variable "product" {
-  type = "string"
+  type    = "string"
   default = "ccpay"
 }
 
@@ -9,7 +9,13 @@ variable "location" {
 }
 
 variable "env" {
-  type = "string"
+  type    = "string"
+  default = "hmctsdemo"
+}
+
+variable "subscription" {
+  type    = "string"
+  default = "hmctsdemo"
 }
 
 variable "tenant_id" {
@@ -23,6 +29,7 @@ variable "jenkins_AAD_objectId" {
 variable "common_tags" {
   type = "map"
 }
+
 variable "team_name" {
   default = "cc-payments"
 }
@@ -34,9 +41,11 @@ variable "team_contact" {
 variable "fees-register-frontend_external_hostname" {
   default = "fees-register.hmctsdemo.platform.hmcts.net"
 }
+
 variable "fees-register-frontend_external_cert_name" {
   default = "external-cert"
 }
+
 variable "fees-register-frontend_external_cert_vault_uri" {
   default = "https://ccpay-hmctsdemo.vault.azure.net/"
 }
