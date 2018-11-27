@@ -16,14 +16,24 @@ module "topic" {
   name                  = "serviceCallbackTopic"
   namespace_name        = "${module.servicebus-namespace.name}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
+
 }
-  
+
+module "queue" {
+  source                = "git@github.com:hmcts/terraform-module-servicebus-queue.git"
+  name                  = "serviceCallbackRetryQueue"
+  namespace_name        = "${module.servicebus-namespace.name}"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+}
+
 module "subscription" {
   source                = "git@github.com:hmcts/terraform-module-servicebus-subscription.git"
   name                  = "${local.subscription_name}"
   namespace_name        = "${module.servicebus-namespace.name}"
   topic_name            = "${module.topic.name}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
+  max_delivery_count    = "1"
+  forward_dead_lettered_messages_to = "${module.queue.name}"
 }
 
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
