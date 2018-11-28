@@ -27,7 +27,7 @@ module "queue" {
 }
 
 module "subscription" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription.git"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription.git?ref=deadletter"
   name                  = "${local.subscription_name}"
   namespace_name        = "${module.servicebus-namespace.name}"
   topic_name            = "${module.topic.name}"
