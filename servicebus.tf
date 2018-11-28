@@ -27,13 +27,12 @@ module "queue" {
 }
 
 module "subscription" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription.git?ref=deadletter"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription.git"
   name                  = "${local.subscription_name}"
   namespace_name        = "${module.servicebus-namespace.name}"
   topic_name            = "${module.topic.name}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   max_delivery_count    = "1"
-  forward_to            = ""
   forward_dead_lettered_messages_to = "${local.retry_queue}"
 }
 
