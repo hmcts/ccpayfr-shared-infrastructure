@@ -33,7 +33,7 @@ module "subscription" {
   topic_name            = "${module.topic.name}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   max_delivery_count    = "1"
-  forward_dead_lettered_messages_to = "${module.queue.name}"
+  forward_dead_lettered_messages_to = "${local.retry_queue}"
 }
 
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
