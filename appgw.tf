@@ -89,6 +89,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "pay-bubble-https-probe"
       PickHostNameFromBackendAddress = "True"
+      HostName = ""
     }
   ]
   # Request routing rules
