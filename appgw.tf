@@ -87,7 +87,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "pay-bubble-http-probe"
       PickHostNameFromBackendAddress = "True"
-      HostName = ""
+      HostName = "${var.pay_bubble_external_hostname}"
     },
     {
       name = "backend-443"
@@ -98,7 +98,7 @@ module "appGwSouth" {
       probeEnabled = "True"
       probe = "pay-bubble-https-probe"
       PickHostNameFromBackendAddress = "True"
-      HostName = ""
+      HostName = "${var.pay_bubble_external_hostname}"
     }
   ]
   # Request routing rules
