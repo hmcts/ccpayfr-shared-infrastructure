@@ -138,7 +138,7 @@ module "appGwSouth" {
       unhealthyThreshold = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-80"
-      host = "${local.paybubble_backend_hostname}"
+      host = "${var.pay_bubble_external_hostname}"
       healthyStatusCodes = "200-404"
     },
     {
@@ -150,7 +150,7 @@ module "appGwSouth" {
       unhealthyThreshold = 5
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-443"
-      host = "${local.paybubble_backend_hostname}"
+      host = "${var.pay_bubble_external_hostname}"
       healthyStatusCodes = "200-404" // MS returns 404 on /, allowing more codes in case they change it
     }
   ]
