@@ -86,7 +86,7 @@ module "appGwSouth" {
       AuthenticationCertificates = ""
       probeEnabled = "True"
       probe = "pay-bubble-http-probe"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       HostName = "${var.pay_bubble_external_hostname}"
     },
     {
@@ -97,7 +97,7 @@ module "appGwSouth" {
       AuthenticationCertificates = "ilbCert"
       probeEnabled = "True"
       probe = "pay-bubble-https-probe"
-      PickHostNameFromBackendAddress = "True"
+      PickHostNameFromBackendAddress = "False"
       HostName = "${var.pay_bubble_external_hostname}"
     }
   ]
