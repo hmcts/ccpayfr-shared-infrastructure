@@ -99,6 +99,17 @@ module "appGwSouth" {
       probe = "pay-bubble-https-probe"
       PickHostNameFromBackendAddress = "False"
       HostName = "${var.pay_bubble_external_hostname}"
+    },
+    {
+      name = "backend-443-www"
+      port = 443
+      Protocol = "Https"
+      CookieBasedAffinity = "Disabled"
+      AuthenticationCertificates = "ilbCert"
+      probeEnabled = "True"
+      probe = "pay-bubble-https-probe"
+      PickHostNameFromBackendAddress = "False"
+      HostName = "${var.pay_bubble_external_hostname_www}"
     }
   ]
   # Request routing rules
@@ -123,7 +134,7 @@ module "appGwSouth" {
       RuleType = "Basic"
       httpListener = "pay-bubble-https-listener-www"
       backendAddressPool = "${local.backend_address_pool}"
-      backendHttpSettings = "backend-443"
+      backendHttpSettings = "backend-443-www"
     }
   ]
 
@@ -151,6 +162,18 @@ module "appGwSouth" {
       pickHostNameFromBackendHttpSettings = "false"
       backendHttpSettings = "backend-443"
       host = "${var.pay_bubble_external_hostname}"
+      healthyStatusCodes = "200-404" // MS returns 404 on /, allowing more codes in case they change it
+    },
+    {
+      name = "pay-bubble-https-probe-www"
+      protocol = "Https"
+      path = "${var.health_check}"
+      interval = 30
+      timeout = 30
+      unhealthyThreshold = 5
+      pickHostNameFromBackendHttpSettings = "false"
+      backendHttpSettings = "backend-443-www"
+      host = "${var.pay_bubble_external_hostname_www}"
       healthyStatusCodes = "200-404" // MS returns 404 on /, allowing more codes in case they change it
     }
   ]
