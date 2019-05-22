@@ -107,7 +107,7 @@ module "appGwSouth" {
       CookieBasedAffinity = "Disabled"
       AuthenticationCertificates = "ilbCert"
       probeEnabled = "True"
-      probe = "pay-bubble-https-probe"
+      probe = "pay-bubble-https-probe-www"
       PickHostNameFromBackendAddress = "False"
       HostName = "${var.pay_bubble_external_hostname_www}"
     }
