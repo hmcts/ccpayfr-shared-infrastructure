@@ -10,7 +10,7 @@ data "azurerm_key_vault_secret" "paybubble-cert" {
 
 //APPLICATION GATEWAY RESOURCE FOR ENV=A
 module "appGwSouth" {
-  source = "git@github.com:hmcts/cnp-module-waf?ref=ccpay-waf"
+  source = "git@github.com:hmcts/cnp-module-waf?ref=master"
   env = "${var.env}"
   subscription = "${var.subscription}"
   location = "${var.location}"
