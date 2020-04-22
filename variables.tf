@@ -56,8 +56,3 @@ variable "fr_product" {
   default = "fees-register"
 }
 
-variable "pay_bubble_external_cert_name" {}
-variable "pay_bubble_external_cert_vault_uri" {}
-variable "pay_bubble_external_hostname" {}
-variable "pay_bubble_external_hostname_www" {}
-
