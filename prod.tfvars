@@ -1,5 +1,1 @@
-pay_bubble_external_hostname = "paybubble.platform.hmcts.net"
-pay_bubble_external_hostname_www = "www.paybubble.platform.hmcts.net"
-pay_bubble_external_cert_name = "paybubble-external-cert"
-pay_bubble_external_cert_vault_uri = "https://infra-vault-prod.vault.azure.net/"
 managed_identity_object_id = "5bf271c4-5693-4053-ae5b-5fba3805a63d"
