@@ -36,6 +36,13 @@ variable "team_name" {
 variable "team_contact" {
   default = "#cc-payments-tech "
 }
+
+// as of now, UK South is unavailable for Application Insights
+variable "appinsights_location" {
+  type = "string"
+  default = "West Europe"
+  description = "Location for Application Insights"
+
 variable "application_type" {
   type = "string"
   default = "Web"
@@ -60,4 +67,3 @@ variable "pay_bubble_external_cert_name" {}
 variable "pay_bubble_external_cert_vault_uri" {}
 variable "pay_bubble_external_hostname" {}
 variable "pay_bubble_external_hostname_www" {}
-
