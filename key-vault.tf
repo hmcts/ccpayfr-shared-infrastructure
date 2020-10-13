@@ -10,7 +10,8 @@ module "ccpay-vault" {
   product_group_object_id = "56679aaa-b343-472a-bb46-58bbbfde9c3d"
   common_tags         = "${var.common_tags}"
   #aks migration
-  managed_identity_object_id = "${var.managed_identity_object_id}"
+  managed_identity_object_ids = ["${var.managed_identity_object_id}"]
+  create_managed_identity    = true
 }
 
 module "feesregister-vault" {
@@ -25,5 +26,6 @@ module "feesregister-vault" {
   product_group_object_id = "56679aaa-b343-472a-bb46-58bbbfde9c3d"
   common_tags         = "${var.common_tags}"
   #aks migration
-  managed_identity_object_id = "${var.managed_identity_object_id}"
+  managed_identity_object_ids = ["${var.managed_identity_object_id}"]
+  create_managed_identity    = true
 }
