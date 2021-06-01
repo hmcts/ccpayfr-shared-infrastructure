@@ -2,6 +2,10 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
+// Configure branches to sync with master branch
+def branchesToSync = ['demo', 'ithc', 'perftest']
 
-withInfraPipeline('ccpay') {}
-
+withInfraPipeline('ccpay') {
+    //Sync demo,ithc and perftest with master branch
+    syncBranchesWithMaster(branchesToSync)
+}
