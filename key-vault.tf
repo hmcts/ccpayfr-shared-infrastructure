@@ -39,3 +39,19 @@ data "azurerm_user_assigned_identity" "ccpay-shared-identity" {
   resource_group_name = "managed-identities-${var.env}-rg"
 }
 
+data "azurerm_key_vault" "s2s_key_vault" {
+  name                = local.s2s_key_vault_name
+  resource_group_name = local.s2s_vault_resource_group
+}
+
+data "azurerm_key_vault_secret" "s2s_secret" {
+  name          = "microservicekey-ccpay-cpo-function-node"
+  key_vault_id  = data.azurerm_key_vault.s2s_key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "ccpay_cpo_s2s_secret" {
+  name          = "ccpay-cpo-s2s-secret"
+  value         = data.azurerm_key_vault_secret.s2s_secret.value
+  key_vault_id  = data.azurerm_key_vault.ccpay_key_vault.id
+}
+

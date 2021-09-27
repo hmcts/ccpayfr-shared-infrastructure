@@ -3,6 +3,11 @@ variable "product" {
   default = "ccpay"
 }
 
+variable "core_product" {
+  type    = string
+  default = "ccpay"
+}
+
 variable "location" {
   type    = string
   default = "UK South"
@@ -42,11 +47,6 @@ variable "application_type" {
   type = string
   default = "web"
   description = "Type of Application Insights (Web/Other)"
-}
-
-variable "health_check" {
-  default     = "/health"
-  description = "endpoint for healthcheck"
 }
 
 variable "managed_identity_object_id" {
