@@ -1,5 +1,5 @@
 locals {
-  ase_name = join("-", ["core-compute", var.env])
+  ase_name     = join("-", ["core-compute", var.env])
   asp_capacity = "${var.env == "prod" || var.env == "aat" ? 2 : 1}"
   // I2 in prod like env, I1 everywhere else
   sku_size = "${var.env == "prod" || var.env == "aat" ? "I2" : "I1"}"

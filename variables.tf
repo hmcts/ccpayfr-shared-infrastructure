@@ -1,5 +1,5 @@
 variable "product" {
-  type = string
+  type    = string
   default = "ccpay"
 }
 
@@ -13,7 +13,7 @@ variable "env" {
 }
 
 variable "subscription" {
-  type    = string
+  type = string
 }
 
 variable "ilbIp" {}
@@ -30,17 +30,17 @@ variable "common_tags" {
   type = map(string)
 }
 variable "team_name" {
-  type = string
+  type        = string
   description = "Team Name"
-  default = "cc-payments"
+  default     = "cc-payments"
 }
 
 variable "team_contact" {
   default = "#cc-payments-tech "
 }
 variable "application_type" {
-  type = string
-  default = "web"
+  type        = string
+  default     = "web"
   description = "Type of Application Insights (Web/Other)"
 }
 
@@ -54,6 +54,8 @@ variable "managed_identity_object_id" {
 }
 
 variable "fr_product" {
-  type = string
+  type    = string
   default = "fees-register"
 }
+
+variable "aks_subscription_id" {}
