@@ -8,7 +8,7 @@ module "servicebus-namespace" {
     azurerm.private_endpoint = azurerm.private_endpoint
   }
   
-  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=DTSPO-6371_remove_provider"
   name                = "${var.product}-servicebus-${var.env}"
   location            = var.location
   env                 = var.env
