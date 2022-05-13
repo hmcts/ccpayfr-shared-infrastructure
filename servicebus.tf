@@ -17,21 +17,21 @@ module "servicebus-namespace" {
 }
 
 module "topic" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=DTSPO-6371_azurerm_upgrade"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
   name                  = "serviceCallbackTopic"
   namespace_name        = module.servicebus-namespace.name
   resource_group_name   = azurerm_resource_group.rg.name
 }
 
 module "queue" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=DTSPO-6371_azurerm_upgrade"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
   name                  = local.retry_queue
   namespace_name        = module.servicebus-namespace.name
   resource_group_name   = azurerm_resource_group.rg.name
 }
 
 module "subscription" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=DTSPO-6371_azurerm_upgrade"
+  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
   name                  = local.subscription_name
   namespace_name        = module.servicebus-namespace.name
   topic_name            = module.topic.name
