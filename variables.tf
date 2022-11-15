@@ -58,4 +58,10 @@ variable "fr_product" {
   default = "fees-register"
 }
 
+variable "sku" {
+  type        = string
+  default     = "Premium"
+  description = "SKU type(Basic, Standard and Premium)"
+}
+
 variable "aks_subscription_id" {}
