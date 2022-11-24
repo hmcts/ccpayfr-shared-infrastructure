@@ -1,6 +1,6 @@
 locals {
-  subscription_name = "defaultServiceCallbackSubscription"
-  retry_queue       = "serviceCallbackRetryQueue"
+  subscription_name = "defaultServiceCallbackSubscription-premium"
+  retry_queue       = "serviceCallbackRetryQueue-premium"
 }
 
 module "servicebus-namespace-premium" {
@@ -63,7 +63,7 @@ output "topic_primary_send_and_listen_connection_string-premium" {
   sensitive = true
 }
 
-output "psc_subscription_connection_string" {
-  value     = "${module.topic.primary_send_and_listen_connection_string}/subscriptions/${local.subscription_name}"
+output "psc_subscription_connection_string-premium" {
+  value     = "${module.topic.primary_send_and_listen_connection_string}/subscriptions/${local.subscription_name-premium}"
   sensitive = true
 }
