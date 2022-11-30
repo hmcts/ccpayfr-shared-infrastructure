@@ -7,7 +7,11 @@ module "feepay-fail-alert" {
 
   alert_name                 = "feepay-fail-alert"
   alert_desc                 = "Triggers when an feepay exception is received in a 5 minute poll."
-  app_insights_query         = "requests | where toint(resultCode) >= 400 | sort by timestamp desc"
+  app_insights_query         = <<EOF
+| where timestamp > ago(60m)
+| where success == false and resultCode matches regex “5.*”
+| summarize failure_count = count()
+EOF
   frequency_in_minutes       = 15
   time_window_in_minutes     = 15
   severity_level             = "3"
