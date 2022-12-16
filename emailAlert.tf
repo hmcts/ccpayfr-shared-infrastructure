@@ -36,7 +36,7 @@ module "feepay-fail-action-group" {
 
 data "azurerm_key_vault_secret" "email-alert-recipient" {
   name         = "email-alert-recipient"
- key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
+  key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
  }
  
  output "email-alert-recipient" {
