@@ -13,7 +13,7 @@ module "feepay-fail-alert" {
   time_window_in_minutes     = 15
   severity_level             = "3"
   action_group_name          = module.feepay-fail-action-group.action_group_name
-  custom_email_subject       = "Alert for 5xx Error "
+  custom_email_subject       = "Alert for 5xx Error - ${var.env} "
   trigger_threshold_operator = "GreaterThan"
   trigger_threshold          = 20
   resourcegroup_name         = azurerm_resource_group.rg.name
