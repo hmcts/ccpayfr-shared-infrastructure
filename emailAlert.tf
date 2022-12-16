@@ -30,7 +30,18 @@ module "feepay-fail-action-group" {
   action_group_name      = "feepay Fail  Alert - ${var.env}"
   short_name             = "feepay_alert"
   email_receiver_name    = "feepay Alerts"
-  email_receiver_address = "anooj.kurup@hmcts.net"
+  email_receiver_address = "${data.azurerm_key_vault_secret.email-alert-recipient.value}"
+}
+
+
+data "azurerm_key_vault_secret" "email-alert-recipient" {
+  name         = "email-alert-recipient"
+ key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
+ }
+ 
+ output "email-alert-recipient" {
+  value = data.azurerm_key_vault_secret.email-alert-recipient
+  sensitive=true
 }
 
 
