@@ -30,7 +30,6 @@ module "feepay-fail-action-group" {
   action_group_name      = "feepay Fail  Alert - ${var.env}"
   short_name             = "feepay_alert"
   email_receiver_name    = "feepay Alerts"
-  #email_receiver_address = "Anshika.nigam@hmcts.net,anooj.kurup@hmcts.net,kaushik.maitra@hmcts.net,john.scott@hmcts.net,sakthivel.vedachalam@hmcts.net,lars.lunde@hmcts.net"
   email_receiver_address = "anooj.kurup@hmcts.net"
 }
 
