@@ -58,4 +58,7 @@ variable "fr_product" {
   default = "fees-register"
 }
 
+variable "sku" {
+  default = "Standard"
+}
 variable "aks_subscription_id" {}
