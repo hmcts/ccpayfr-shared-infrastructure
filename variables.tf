@@ -59,3 +59,7 @@ variable "fr_product" {
 }
 
 variable "aks_subscription_id" {}
+
+variable "sku" {
+  default = "Standard"
+}
