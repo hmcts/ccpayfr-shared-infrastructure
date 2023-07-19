@@ -16,8 +16,6 @@ variable "subscription" {
   type = string
 }
 
-variable "ilbIp" {}
-
 variable "tenant_id" {
   description = "(Required) The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. This is usually sourced from environemnt variables and not normally required to be specified."
 }
@@ -59,3 +57,7 @@ variable "fr_product" {
 }
 
 variable "aks_subscription_id" {}
+
+variable "sku" {
+  default = "Standard"
+}
