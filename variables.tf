@@ -25,8 +25,9 @@ variable "jenkins_AAD_objectId" {
 }
 
 variable "common_tags" {
-  type = map(string)
+  type = map(any)
 }
+
 variable "team_name" {
   type        = string
   description = "Team Name"
@@ -54,6 +55,12 @@ variable "managed_identity_object_id" {
 variable "fr_product" {
   type    = string
   default = "fees-register"
+}
+
+variable "sku" {
+  type        = string
+  default     = "Standard"
+  description = "SKU type(Basic, Standard and Premium)"
 }
 
 variable "aks_subscription_id" {}
