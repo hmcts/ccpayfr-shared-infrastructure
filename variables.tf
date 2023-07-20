@@ -59,7 +59,7 @@ variable "fr_product" {
 
 variable "sku" {
   type        = string
-  default     = "Premium"
+  default     = "Standard"
   description = "SKU type(Basic, Standard and Premium)"
 }
 
