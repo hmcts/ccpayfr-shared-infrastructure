@@ -12,8 +12,8 @@ module "servicebus-namespace" {
   name                = "${var.product}-servicebus-${var.env}"
   location            = var.location
   env                 = var.env
-  sku                 = var.sku
   common_tags         = local.tags
+  sku                 = var.sku
   resource_group_name = azurerm_resource_group.rg.name
 }
 

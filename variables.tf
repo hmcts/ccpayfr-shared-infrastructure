@@ -25,8 +25,9 @@ variable "jenkins_AAD_objectId" {
 }
 
 variable "common_tags" {
-  type = map(string)
+  type = map(any)
 }
+
 variable "team_name" {
   type        = string
   description = "Team Name"
@@ -34,7 +35,7 @@ variable "team_name" {
 }
 
 variable "team_contact" {
-  default = "#cc-payments-tech "
+  default = "#fee-pay-nightly-pipeline"
 }
 variable "application_type" {
   type        = string
@@ -56,8 +57,10 @@ variable "fr_product" {
   default = "fees-register"
 }
 
-variable "aks_subscription_id" {}
-
 variable "sku" {
-  default = "Standard"
+  type        = string
+  default     = "Standard"
+  description = "SKU type(Basic, Standard and Premium)"
 }
+
+variable "aks_subscription_id" {}
