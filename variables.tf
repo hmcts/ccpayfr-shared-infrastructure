@@ -36,7 +36,7 @@ variable "team_name" {
 }
 
 variable "team_contact" {
-  default = "#cc-payments-tech "
+  default = "#fee-pay-nightly-pipeline"
 }
 variable "application_type" {
   type        = string
