@@ -16,8 +16,6 @@ variable "subscription" {
   type = string
 }
 
-variable "ilbIp" {}
-
 variable "tenant_id" {
   description = "(Required) The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. This is usually sourced from environemnt variables and not normally required to be specified."
 }
@@ -27,8 +25,9 @@ variable "jenkins_AAD_objectId" {
 }
 
 variable "common_tags" {
-  type = map(string)
+  type = map(any)
 }
+
 variable "team_name" {
   type        = string
   description = "Team Name"
@@ -36,7 +35,7 @@ variable "team_name" {
 }
 
 variable "team_contact" {
-  default = "#cc-payments-tech "
+  default = "#fee-pay-nightly-pipeline"
 }
 variable "application_type" {
   type        = string
@@ -56,6 +55,12 @@ variable "managed_identity_object_id" {
 variable "fr_product" {
   type    = string
   default = "fees-register"
+}
+
+variable "sku" {
+  type        = string
+  default     = "Standard"
+  description = "SKU type(Basic, Standard and Premium)"
 }
 
 variable "aks_subscription_id" {}
