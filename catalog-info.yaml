@@ -9,8 +9,8 @@ metadata:
   tags:
     - terraform
   links:
-    - url: https://hmcts-reform.slack.com/app_redirect?channel=fee-pay-nightly-pipelines
-      title: "#fee-pay-nightly-pipelines on Slack"
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=fee-pay-nightly-pipeline
+      title: "#fee-pay-nightly-pipeline on Slack"
       icon: chat
 spec:
   type: service
