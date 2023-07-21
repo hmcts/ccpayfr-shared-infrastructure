@@ -9,13 +9,13 @@ module "feepay-fail-alert" {
   alert_desc                 = "Triggers when an feepay exception is received."
   app_insights_query         = "requests | where toint(resultCode) >= 500 | sort by timestamp desc"
 
-  frequency_in_minutes       = 15
-  time_window_in_minutes     = 15
+  frequency_in_minutes       = "15"
+  time_window_in_minutes     = "15"
   severity_level             = "3"
   action_group_name          = module.feepay-fail-action-group.action_group_name
   custom_email_subject       = "Alert for 5xx Error - ${var.env} "
   trigger_threshold_operator = "GreaterThan"
-  trigger_threshold          = 20
+  trigger_threshold          = "20"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
 }
