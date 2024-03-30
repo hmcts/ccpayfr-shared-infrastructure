@@ -7,7 +7,7 @@ module "servicebus-namespace" {
   providers = {
     azurerm.private_endpoint = azurerm.private_endpoint
   }
-  
+
   source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
   name                = "${var.product}-servicebus-${var.env}"
   location            = var.location
@@ -40,8 +40,6 @@ module "subscription" {
   max_delivery_count    = "1"
   forward_dead_lettered_messages_to = module.queue.name
 }
-
-
 
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
   name         = "sb-primary-connection-string"
