@@ -63,12 +63,4 @@ variable "sku" {
   description = "SKU type(Basic, Standard and Premium)"
 }
 
-variable "sku_premium" {
-  type        = string
-  default     = "Premium"
-  description = "SKU type(Basic, Standard and Premium)"
-}
-
-sku-premium
-
 variable "aks_subscription_id" {}

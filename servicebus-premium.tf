@@ -14,7 +14,8 @@ module "servicebus-namespace-premium" {
   location            = var.location
   env                 = var.env
   common_tags         = local.tags
-  sku                 = var.sku_premium
+  sku                 = var.sku
+  zone_redundant      = var.sku != "Premium" ? "false" : "true"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
