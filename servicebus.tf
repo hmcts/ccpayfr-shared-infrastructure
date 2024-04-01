@@ -14,6 +14,7 @@ module "servicebus-namespace" {
   env                 = var.env
   common_tags         = local.tags
   sku                 = "Standard"
+  service_bus_enable_private_endpoint = false
   resource_group_name = azurerm_resource_group.rg.name
 }
 
