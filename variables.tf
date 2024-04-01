@@ -57,10 +57,14 @@ variable "fr_product" {
   default = "fees-register"
 }
 
-variable "sku" {
+variable "service_bus_sku" {
   type        = string
   default     = "Standard"
   description = "SKU type(Basic, Standard and Premium)"
+}
+
+variable service_bus_enable_private_endpoint {
+  default = false # set to true for Production
 }
 
 variable "aks_subscription_id" {}
