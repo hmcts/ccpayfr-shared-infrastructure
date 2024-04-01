@@ -24,6 +24,8 @@ module "topic-premium" {
   name                  = local.service_callback_topic
   namespace_name        = module.servicebus-namespace-premium.name
   resource_group_name   = azurerm_resource_group.rg.name
+
+  depends_on = [module.servicebus-namespace-premium]
 }
 
 module "queue-premium" {
@@ -31,6 +33,8 @@ module "queue-premium" {
   name                  = local.service_callback_retry_queue
   namespace_name        = module.servicebus-namespace-premium.name
   resource_group_name   = azurerm_resource_group.rg.name
+
+  depends_on = [servicebus-namespace-premium]
 }
 
 module "subscription-premium" {
@@ -41,12 +45,16 @@ module "subscription-premium" {
   resource_group_name   = azurerm_resource_group.rg.name
   max_delivery_count    = "1"
   forward_dead_lettered_messages_to = module.queue-premium.name
+
+  depends_on = [module.topic-premium]
 }
 
 resource "azurerm_key_vault_secret" "servicebus_premium_primary_connection_string" {
   name         = "sb-premium-primary-connection-string"
   value        = module.servicebus-namespace-premium.primary_send_and_listen_connection_string
   key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
+
+  depends_on = [servicebus-namespace-premium]
 }
 
 # primary connection string for send and listen operations

@@ -23,6 +23,8 @@ module "topic" {
   name                  = "serviceCallbackTopic"
   namespace_name        = module.servicebus-namespace.name
   resource_group_name   = azurerm_resource_group.rg.name
+
+  depends_on = [module.servicebus-namespace]
 }
 
 module "queue" {
@@ -30,6 +32,8 @@ module "queue" {
   name                  = local.retry_queue
   namespace_name        = module.servicebus-namespace.name
   resource_group_name   = azurerm_resource_group.rg.name
+
+  depends_on = [module.servicebus-namespace]
 }
 
 module "subscription" {
@@ -40,12 +44,16 @@ module "subscription" {
   resource_group_name   = azurerm_resource_group.rg.name
   max_delivery_count    = "1"
   forward_dead_lettered_messages_to = module.queue.name
+
+  depends_on = [module.topic]
 }
 
 resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
   name         = "sb-primary-connection-string"
   value        = module.servicebus-namespace.primary_send_and_listen_connection_string
   key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
+
+  depends_on = [module.servicebus-namespace]
 }
 
 # primary connection string for send and listen operations
