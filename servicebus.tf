@@ -56,18 +56,3 @@ resource "azurerm_key_vault_secret" "servicebus_primary_connection_string" {
   depends_on = [module.servicebus-namespace]
 }
 
-# primary connection string for send and listen operations
-output "sb_primary_send_and_listen_connection_string" {
-  value     = module.servicebus-namespace.primary_send_and_listen_connection_string
-  sensitive = true
-}
-
-output "topic_primary_send_and_listen_connection_string" {
-  value     = module.topic.primary_send_and_listen_connection_string
-  sensitive = true
-}
-
-output "psc_subscription_connection_string" {
-  value     = "${module.topic.primary_send_and_listen_connection_string}/subscriptions/${local.subscription_name}"
-  sensitive = true
-}
