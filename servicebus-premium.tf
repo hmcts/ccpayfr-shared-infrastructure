@@ -34,7 +34,7 @@ module "queue-premium" {
   namespace_name        = module.servicebus-namespace-premium.name
   resource_group_name   = azurerm_resource_group.rg.name
 
-  depends_on = [servicebus-namespace-premium]
+  depends_on = [module.servicebus-namespace-premium]
 }
 
 module "subscription-premium" {
@@ -54,7 +54,7 @@ resource "azurerm_key_vault_secret" "servicebus_premium_primary_connection_strin
   value        = module.servicebus-namespace-premium.primary_send_and_listen_connection_string
   key_vault_id = data.azurerm_key_vault.ccpay_key_vault.id
 
-  depends_on = [servicebus-namespace-premium]
+  depends_on = [module.servicebus-namespace-premium]
 }
 
 # primary connection string for send and listen operations
