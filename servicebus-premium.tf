@@ -1,7 +1,7 @@
 locals {
-  subscription_name_premium     = "serviceCallbackPremiumSubscription"
-  service_callback_topic        = "ccpay-service-callback-topic"
-  service_callback_retry_queue  = "ccpay-service-callback-retry-queue"
+  subscription_name_premium    = "serviceCallbackPremiumSubscription"
+  service_callback_topic       = "ccpay-service-callback-topic"
+  service_callback_retry_queue = "ccpay-service-callback-retry-queue"
 }
 
 module "servicebus-namespace-premium" {
@@ -20,30 +20,30 @@ module "servicebus-namespace-premium" {
 }
 
 module "topic-premium" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
-  name                  = local.service_callback_topic
-  namespace_name        = module.servicebus-namespace-premium.name
-  resource_group_name   = azurerm_resource_group.rg.name
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
+  name                = local.service_callback_topic
+  namespace_name      = module.servicebus-namespace-premium.name
+  resource_group_name = azurerm_resource_group.rg.name
 
   depends_on = [module.servicebus-namespace-premium]
 }
 
 module "queue-premium" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
-  name                  = local.service_callback_retry_queue
-  namespace_name        = module.servicebus-namespace-premium.name
-  resource_group_name   = azurerm_resource_group.rg.name
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
+  name                = local.service_callback_retry_queue
+  namespace_name      = module.servicebus-namespace-premium.name
+  resource_group_name = azurerm_resource_group.rg.name
 
   depends_on = [module.servicebus-namespace-premium]
 }
 
 module "subscription-premium" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
-  name                  = local.subscription_name_premium
-  namespace_name        = module.servicebus-namespace-premium.name
-  topic_name            = module.topic-premium.name
-  resource_group_name   = azurerm_resource_group.rg.name
-  max_delivery_count    = "1"
+  source                            = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
+  name                              = local.subscription_name_premium
+  namespace_name                    = module.servicebus-namespace-premium.name
+  topic_name                        = module.topic-premium.name
+  resource_group_name               = azurerm_resource_group.rg.name
+  max_delivery_count                = "1"
   forward_dead_lettered_messages_to = module.queue-premium.name
 
   depends_on = [module.topic-premium]

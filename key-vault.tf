@@ -7,9 +7,9 @@ module "ccpay-vault" {
   object_id           = var.jenkins_AAD_objectId
   resource_group_name = azurerm_resource_group.rg.name
   # group id of dcd_reform_dev_azure
-  product_group_name = "dcd_group_fees&pay_v2"
-  common_tags        = var.common_tags
-  create_managed_identity     = true
+  product_group_name      = "dcd_group_fees&pay_v2"
+  common_tags             = var.common_tags
+  create_managed_identity = true
 }
 
 module "feesregister-vault" {
@@ -21,8 +21,8 @@ module "feesregister-vault" {
   object_id           = var.jenkins_AAD_objectId
   resource_group_name = azurerm_resource_group.rg.name
   # group id of dcd_reform_dev_azure
-  product_group_name = "dcd_group_fees&pay_v2"
-  common_tags        = var.common_tags
+  product_group_name          = "dcd_group_fees&pay_v2"
+  common_tags                 = var.common_tags
   managed_identity_object_ids = ["${data.azurerm_user_assigned_identity.ccpay-shared-identity.principal_id}"]
 }
 
