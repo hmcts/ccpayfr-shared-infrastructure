@@ -19,30 +19,30 @@ module "servicebus-namespace" {
 }
 
 module "topic" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
-  name                  = "serviceCallbackTopic"
-  namespace_name        = module.servicebus-namespace.name
-  resource_group_name   = azurerm_resource_group.rg.name
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
+  name                = "serviceCallbackTopic"
+  namespace_name      = module.servicebus-namespace.name
+  resource_group_name = azurerm_resource_group.rg.name
 
   depends_on = [module.servicebus-namespace]
 }
 
 module "queue" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
-  name                  = local.retry_queue
-  namespace_name        = module.servicebus-namespace.name
-  resource_group_name   = azurerm_resource_group.rg.name
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
+  name                = local.retry_queue
+  namespace_name      = module.servicebus-namespace.name
+  resource_group_name = azurerm_resource_group.rg.name
 
   depends_on = [module.servicebus-namespace]
 }
 
 module "subscription" {
-  source                = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
-  name                  = local.subscription_name
-  namespace_name        = module.servicebus-namespace.name
-  topic_name            = module.topic.name
-  resource_group_name   = azurerm_resource_group.rg.name
-  max_delivery_count    = "1"
+  source                            = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
+  name                              = local.subscription_name
+  namespace_name                    = module.servicebus-namespace.name
+  topic_name                        = module.topic.name
+  resource_group_name               = azurerm_resource_group.rg.name
+  max_delivery_count                = "1"
   forward_dead_lettered_messages_to = module.queue.name
 
   depends_on = [module.topic]
