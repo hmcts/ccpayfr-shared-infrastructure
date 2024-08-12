@@ -63,7 +63,7 @@ variable "service_bus_sku" {
   description = "SKU type(Basic, Standard and Premium)"
 }
 
-variable service_bus_enable_private_endpoint {
+variable "service_bus_enable_private_endpoint" {
   default = false # set to true for Production
 }
 
