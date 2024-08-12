@@ -18,6 +18,8 @@ module "feepay-fail-alert" {
   trigger_threshold          = "20"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
+
+  depends_on = [module.feepay-fail-action-group]
 }
 
 
