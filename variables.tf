@@ -37,6 +37,7 @@ variable "team_name" {
 variable "team_contact" {
   default = "#fee-pay-nightly-pipeline"
 }
+
 variable "application_type" {
   type        = string
   default     = "web"
