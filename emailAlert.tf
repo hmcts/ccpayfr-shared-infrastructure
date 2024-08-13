@@ -18,6 +18,8 @@ module "feepay-fail-alert" {
   trigger_threshold          = "20"
   resourcegroup_name         = azurerm_resource_group.rg.name
   common_tags                = var.common_tags
+
+  depends_on = [module.feepay-fail-action-group]
 }
 
 
@@ -27,8 +29,8 @@ module "feepay-fail-action-group" {
   env      = var.env
 
   resourcegroup_name     = azurerm_resource_group.rg.name
-  action_group_name      = "feepay Fail  Alert - ${var.env}"
-  short_name             = "feepay_alert"
+  action_group_name      = "feepay-fail-alert-${var.env}"
+  short_name             = "feepay-alert"
   email_receiver_name    = "feepay Alerts"
   email_receiver_address = data.azurerm_key_vault_secret.email-alert-recipient.value
 }
