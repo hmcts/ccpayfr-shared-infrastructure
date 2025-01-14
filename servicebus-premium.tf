@@ -40,9 +40,8 @@ module "queue-premium" {
 module "subscription-premium" {
   source                            = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=4.x"
   name                              = local.subscription_name_premium
-  namespace_name                    = module.servicebus-namespace-premium.name
   topic_name                        = module.topic-premium.name
-  resource_group_name               = azurerm_resource_group.rg.name
+  namespace_id                      = module.servicebus-namespace-premium.id
   max_delivery_count                = "1"
   forward_dead_lettered_messages_to = module.queue-premium.name
 
