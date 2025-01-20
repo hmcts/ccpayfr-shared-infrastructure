@@ -9,18 +9,17 @@ module "servicebus-namespace-premium" {
     azurerm.private_endpoint = azurerm.private_endpoint
   }
 
-  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-namespace?ref=4.x"
   name                = "${var.product}-servicebus-${var.env}-premium"
   location            = var.location
   env                 = var.env
   common_tags         = local.tags
   sku                 = var.service_bus_sku
-  zone_redundant      = var.service_bus_sku != "Premium" ? "false" : "true"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 module "topic-premium" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=4.x"
   name                = local.service_callback_topic
   namespace_name      = module.servicebus-namespace-premium.name
   resource_group_name = azurerm_resource_group.rg.name
@@ -29,7 +28,7 @@ module "topic-premium" {
 }
 
 module "queue-premium" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=4.x"
   name                = local.service_callback_retry_queue
   namespace_name      = module.servicebus-namespace-premium.name
   resource_group_name = azurerm_resource_group.rg.name
@@ -38,11 +37,10 @@ module "queue-premium" {
 }
 
 module "subscription-premium" {
-  source                            = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=master"
+  source                            = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=4.x"
   name                              = local.subscription_name_premium
-  namespace_name                    = module.servicebus-namespace-premium.name
   topic_name                        = module.topic-premium.name
-  resource_group_name               = azurerm_resource_group.rg.name
+  namespace_id                      = module.servicebus-namespace-premium.id
   max_delivery_count                = "1"
   forward_dead_lettered_messages_to = module.queue-premium.name
 
