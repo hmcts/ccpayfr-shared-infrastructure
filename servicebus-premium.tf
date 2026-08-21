@@ -2,6 +2,11 @@ locals {
   subscription_name_premium    = "serviceCallbackPremiumSubscription"
   service_callback_topic       = "ccpay-service-callback-topic"
   service_callback_retry_queue = "ccpay-service-callback-retry-queue"
+
+  # Functional-test topic/subscription. Isolated from the production topic so that test
+  # messages can only be consumed by the ephemeral functional-test function deployment.
+  subscription_name_functional_test = "serviceCallbackFunctionalTestSubscription"
+  service_callback_ft_topic         = "ccpay-service-callback-ft-topic"
 }
 
 module "servicebus-namespace-premium" {
@@ -45,6 +50,29 @@ module "subscription-premium" {
   forward_dead_lettered_messages_to = module.queue-premium.name
 
   depends_on = [module.topic-premium]
+}
+
+module "topic-functional-test" {
+  count = var.env == "aat" ? 1 : 0
+
+  source              = "git@github.com:hmcts/terraform-module-servicebus-topic?ref=4.x"
+  name                = local.service_callback_ft_topic
+  namespace_name      = module.servicebus-namespace-premium.name
+  resource_group_name = azurerm_resource_group.rg.name
+
+  depends_on = [module.servicebus-namespace-premium]
+}
+
+module "subscription-functional-test" {
+  count = var.env == "aat" ? 1 : 0
+
+  source             = "git@github.com:hmcts/terraform-module-servicebus-subscription?ref=4.x"
+  name               = local.subscription_name_functional_test
+  topic_name         = module.topic-functional-test[count.index].name
+  namespace_id       = module.servicebus-namespace-premium.id
+  max_delivery_count = "1"
+
+  depends_on = [module.topic-functional-test]
 }
 
 resource "azurerm_key_vault_secret" "servicebus_premium_primary_connection_string" {
